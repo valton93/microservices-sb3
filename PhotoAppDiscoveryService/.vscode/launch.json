@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PhotoAppDiscoveryServiceApplication<PhotoAppDiscoveryService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.appsdeveloperblog.photoapp.discovery.PhotoAppDiscoveryServiceApplication",
+            "projectName": "PhotoAppDiscoveryService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
