@@ -1,6 +1,7 @@
 package com.appsdeveloperblog.photoapp.api.gateway;
 
 import java.util.Base64;
+import java.util.List;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -49,8 +50,12 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 				return onError(exchange, "No authorization header",HttpStatus.UNAUTHORIZED);
 			}
 			
-			String authorizationHeader = request.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
-			String jwt = authorizationHeader.replace("Bearer", "");
+			List<String> authHeaders = request.getHeaders().get(HttpHeaders.AUTHORIZATION);
+			if (authHeaders == null || authHeaders.isEmpty()) {
+				return onError(exchange, "No authorization header", HttpStatus.UNAUTHORIZED);
+			}
+			
+			String jwt = authHeaders.get(0).replace("Bearer", "").trim();
 			
 			if(!isJwtValid(jwt)) {
 				return onError(exchange, "JWT token is not valid", HttpStatus.UNAUTHORIZED);
